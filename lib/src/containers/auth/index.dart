@@ -13,3 +13,4 @@ part 'user_container.dart';
 part 'register_info_container.dart';
 part 'display_name_container.dart';
 part 'products_container.dart';
+part 'cart_container.dart';

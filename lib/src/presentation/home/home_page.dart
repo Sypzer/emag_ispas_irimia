@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patron/src/presentation/home/acasa_container.dart';
+import 'package:patron/src/presentation/home/cart_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   Container getBody(BuildContext context) {
     if (_selectedIndex == 0) return AcasaContainer(context);
     if (_selectedIndex == 1) return AcasaContainer(context);//ProduseContainer();
-    if (_selectedIndex == 2) return AcasaContainer(context);//CosContainer();
+    if (_selectedIndex == 2) return CosContainer(context);//CosContainer();
     if (_selectedIndex == 3) return AcasaContainer(context);//FavoriteContainer();
     if (_selectedIndex == 4)
       return AcasaContainer(context);//ContulMeuContainer();

@@ -25,6 +25,10 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       serializers.serialize(object.products,
           specifiedType:
               const FullType(BuiltList, const [const FullType(Product)])),
+      'cart',
+      serializers.serialize(object.cart,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(Product)])),
     ];
 
     return result;
@@ -51,6 +55,12 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
                       BuiltList, const [const FullType(Product)]))!
               as BuiltList<Object?>);
           break;
+        case 'cart':
+          result.cart.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Product)]))!
+              as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -63,13 +73,17 @@ class _$AppState extends AppState {
   final AuthState auth;
   @override
   final BuiltList<Product> products;
+  @override
+  final BuiltList<Product> cart;
 
   factory _$AppState([void Function(AppStateBuilder)? updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({required this.auth, required this.products}) : super._() {
+  _$AppState._({required this.auth, required this.products, required this.cart})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(auth, 'AppState', 'auth');
     BuiltValueNullFieldError.checkNotNull(products, 'AppState', 'products');
+    BuiltValueNullFieldError.checkNotNull(cart, 'AppState', 'cart');
   }
 
   @override
@@ -84,19 +98,22 @@ class _$AppState extends AppState {
     if (identical(other, this)) return true;
     return other is AppState &&
         auth == other.auth &&
-        products == other.products;
+        products == other.products &&
+        cart == other.cart;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, auth.hashCode), products.hashCode));
+    return $jf(
+        $jc($jc($jc(0, auth.hashCode), products.hashCode), cart.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
           ..add('auth', auth)
-          ..add('products', products))
+          ..add('products', products)
+          ..add('cart', cart))
         .toString();
   }
 }
@@ -113,6 +130,10 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$this._products ??= new ListBuilder<Product>();
   set products(ListBuilder<Product>? products) => _$this._products = products;
 
+  ListBuilder<Product>? _cart;
+  ListBuilder<Product> get cart => _$this._cart ??= new ListBuilder<Product>();
+  set cart(ListBuilder<Product>? cart) => _$this._cart = cart;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -120,6 +141,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     if ($v != null) {
       _auth = $v.auth.toBuilder();
       _products = $v.products.toBuilder();
+      _cart = $v.cart.toBuilder();
       _$v = null;
     }
     return this;
@@ -141,7 +163,10 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     _$AppState _$result;
     try {
       _$result = _$v ??
-          new _$AppState._(auth: auth.build(), products: products.build());
+          new _$AppState._(
+              auth: auth.build(),
+              products: products.build(),
+              cart: cart.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -149,6 +174,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
         auth.build();
         _$failedField = 'products';
         products.build();
+        _$failedField = 'cart';
+        cart.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppState', _$failedField, e.toString());

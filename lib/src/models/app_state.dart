@@ -15,6 +15,8 @@ abstract class AppState implements Built<AppState, AppStateBuilder>{
 
   BuiltList<Product> get products;
 
+  BuiltList<Product> get cart;
+
   Map<String, dynamic>? get json => serializers.serializeWith(serializer, this) as Map<String, dynamic>?;
 
   static Serializer<AppState> get serializer => _$appStateSerializer;

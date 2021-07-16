@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:patron/src/actions/product/index.dart';
+import 'package:patron/src/models/index.dart';
 import 'package:patron/src/models/product.dart';
 
 class ProductPage extends StatefulWidget {
-  ProductPage({Key? key,Product? product}) :_product = product, super(key: key);
-
+  ProductPage({Key? key, Product? product})
+      : _product = product,
+        super(key: key);
 
   final Product? _product;
+
   @override
   _MovieDetailsState createState() => _MovieDetailsState();
 }
 
 class _MovieDetailsState extends State<ProductPage> {
-
   double fontsize = 14;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +40,7 @@ class _MovieDetailsState extends State<ProductPage> {
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(
-                            widget._product!.img),
+                        image: NetworkImage(widget._product!.img),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -56,7 +60,8 @@ class _MovieDetailsState extends State<ProductPage> {
                         padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
                         child: Text(
                           '-${widget._product!.discount}%',
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),
@@ -141,7 +146,7 @@ class _MovieDetailsState extends State<ProductPage> {
             const SizedBox(height: 16),
             Center(
               child: Text(
-                '${widget._product!.name}',
+                '${widget._product!.description}',
                 style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
@@ -160,7 +165,7 @@ class _MovieDetailsState extends State<ProductPage> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${widget._product!.price * (1 - (widget._product!.discount / 100))} RON',
+                    '${(widget._product!.price * (1 - (widget._product!.discount / 100))).toStringAsFixed(2)} RON',
                     style: const TextStyle(
                       color: Colors.red,
                       fontSize: 24,
@@ -231,6 +236,12 @@ class _MovieDetailsState extends State<ProductPage> {
                   ),
                 ),
               ],
+            ),
+            TextButton(
+              child: const Text('Add to cart!'),
+              onPressed: () {
+                StoreProvider.of<AppState>(context).dispatch(AddProductToCart(widget._product));
+              },
             ),
           ],
         ),

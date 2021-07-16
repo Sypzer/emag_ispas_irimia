@@ -5,3 +5,5 @@ import 'package:patron/src/models/product.dart';
 import 'package:patron/src/models/index.dart';
 part 'get_products.dart';
 part 'index.freezed.dart';
+part 'add_products_to_cart.dart';
+part 'remove_products_from_cart.dart';

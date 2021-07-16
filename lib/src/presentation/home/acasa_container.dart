@@ -165,7 +165,7 @@ Container AcasaContainer(BuildContext context) {
                                                   ),
                                                   const SizedBox(height: 2),
                                                   Text(
-                                                    '${products[index]!.price * (1 - (products[index]!.discount / 100))} RON',
+                                                    '${(products[index]!.price * (1 - (products[index]!.discount / 100))).toStringAsFixed(2)} RON',
                                                     style: const TextStyle(
                                                       color: Colors.red,
                                                       fontSize: 18,
