@@ -19,7 +19,6 @@ mixin InitMixin<S extends StatefulWidget> on State<S>{
     ]);
 
     _completer.complete(result[0]);
-    print('sugi pula');
   }
   Future<Store<AppState>> get future => _completer.future;
 
